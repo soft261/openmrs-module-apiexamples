@@ -1,0 +1,6 @@
+org/openmrs/module/apiexamples/api/APIExamplesService.class
+org/openmrs/module/apiexamples/Item.class
+org/openmrs/module/apiexamples/api/impl/APIExamplesServiceImpl.class
+org/openmrs/module/apiexamples/APIExamplesActivator.class
+org/openmrs/module/apiexamples/APIExamplesConfig.class
+org/openmrs/module/apiexamples/api/dao/APIExamplesDao.class
