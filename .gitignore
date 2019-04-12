@@ -4,7 +4,9 @@
 .DS_Store
 target/
 .project
-api/.classpath
-api/.project
-omod/.classpath
-omod/.project
+.vscode
+**/.classpath
+**/.project
+**/.factorypath
+**/bin/
+*.class
