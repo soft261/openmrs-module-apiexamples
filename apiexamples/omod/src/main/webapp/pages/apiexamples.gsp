@@ -1,4 +1,5 @@
 <% ui.decorateWith("appui", "standardEmrPage") %>
+<h1 style="text-align:center;">API Examples</h1>
 
 Hello, world.
 
@@ -13,3 +14,5 @@ Hello, world.
 <% } %>
 
 ${ ui.includeFragment("apiexamples", "users") }
+${ ui.includeFragment("apiexamples", "obs") }
+${ ui.includeFragment("apiexamples", "person") }

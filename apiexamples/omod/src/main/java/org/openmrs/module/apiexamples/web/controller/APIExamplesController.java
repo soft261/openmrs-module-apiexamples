@@ -17,6 +17,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.User;
 import org.openmrs.api.UserService;
+//import org.openmrs.Obs;
+//import org.openmrs.api.ObsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -37,6 +39,8 @@ public class APIExamplesController {
 	
 	@Autowired
 	UserService userService;
+	
+	//ObsService obsService;
 	
 	/** Success form view name */
 	private final String VIEW = "/module/apiexamples/apiexamples";
@@ -83,5 +87,14 @@ public class APIExamplesController {
 		// that is defined in the @ModuleAttribute tag
 		return users;
 	}
+	
+	/* @ModelAttribute("obs")
+	protected List<Obs> getObs() throws Exception {
+		List<Obs> obs = obsService.getObservations("Diabetes Mellitus");
+		
+		// this object will be made available to the jsp page under the variable name
+		// that is defined in the @ModuleAttribute tag
+		return obs; 
+	} */
 	
 }
