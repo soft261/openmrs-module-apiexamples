@@ -1,4 +1,4 @@
-<h2 style="margin-top:40px;">Obs</h2>
+<h2 style="margin-top:40px;">Obs for ${ui.format(name)}</h2>
 <table>
   <tr>
    <th>Obs Id</th>

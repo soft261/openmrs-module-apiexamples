@@ -9,7 +9,10 @@
  */
 package org.openmrs.module.apiexamples.fragment.controller;
 
+import java.util.Set;
+
 import org.openmrs.Person;
+import org.openmrs.PersonName;
 import org.openmrs.api.ObsService;
 import org.openmrs.api.context.Context;
 import org.openmrs.ui.framework.annotation.SpringBean;
@@ -21,9 +24,16 @@ import org.openmrs.ui.framework.fragment.FragmentModel;
 public class ObsFragmentController {
 	
 	// Create a person and insert their UUID here
-	Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");;
+	Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
+	
+	protected String getPersonNameString(Person person) {
+		Set<PersonName> personName = person.getNames();
+		String nameString = personName.toString().replaceAll("\\[(.*?)\\]", "$1");
+		return nameString;
+	}
 	
 	public void controller(FragmentModel model, @SpringBean("obsService") ObsService service) {
+		model.addAttribute("name", getPersonNameString(person));
 		model.addAttribute("obs", service.getObservationsByPerson(person));
 	}
 	

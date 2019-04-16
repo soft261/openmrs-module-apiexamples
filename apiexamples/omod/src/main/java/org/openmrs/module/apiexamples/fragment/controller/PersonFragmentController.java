@@ -9,7 +9,12 @@
  */
 package org.openmrs.module.apiexamples.fragment.controller;
 
+import java.util.Set;
+
+import org.openmrs.Person;
+import org.openmrs.PersonName;
 import org.openmrs.api.PersonService;
+import org.openmrs.api.context.Context;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 
@@ -17,6 +22,12 @@ import org.openmrs.ui.framework.fragment.FragmentModel;
  *  * Controller for a fragment that shows all users  
  */
 public class PersonFragmentController {
+	
+	protected String getPersonNameString(Person person) {
+		Set<PersonName> personName = person.getNames();
+		String nameString = personName.toString().replaceAll("\\[(.*?)\\]", "$1");
+		return nameString;
+	}
 	
 	public void controller(FragmentModel model, @SpringBean("personService") PersonService service) {
 		// Database has multiple patients with the last name "Smith"

@@ -2,6 +2,7 @@
 <table>
   <tr>
    <th>Person Id</th>
+   <th>Name</th>
    <th>Gender</th>
    <th>Birthdate</th>
    <th>Patient?</th>
@@ -10,6 +11,7 @@
      <% person.each { %>
       <tr>
         <td>${ ui.format(it.personId) }</td>
+        <td>${ ui.format("TODO") }</td>
         <td>${ ui.format(it.gender) }</td>
         <td>${ ui.format(it.birthdate) }</td>
         <td>${ ui.format(it.isPatient) }</td>
