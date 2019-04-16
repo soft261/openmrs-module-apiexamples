@@ -14,7 +14,6 @@ import java.util.Set;
 import org.openmrs.Person;
 import org.openmrs.PersonName;
 import org.openmrs.api.PersonService;
-import org.openmrs.api.context.Context;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 
