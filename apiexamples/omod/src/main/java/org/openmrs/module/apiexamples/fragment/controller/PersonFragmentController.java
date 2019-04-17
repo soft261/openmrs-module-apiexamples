@@ -22,8 +22,8 @@ import org.openmrs.ui.framework.fragment.FragmentModel;
  */
 public class PersonFragmentController {
 	
-	protected String getPersonNameString(Person person) {
-		Set<PersonName> personName = person.getNames();
+	public String getPersonNameString(Person person, @SpringBean("personService") PersonService service) {
+		PersonName personName = person.getPersonName();
 		String nameString = personName.toString().replaceAll("\\[(.*?)\\]", "$1");
 		return nameString;
 	}
