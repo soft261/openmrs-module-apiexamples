@@ -1,18 +1,23 @@
-<h2 style="margin-top:40px;">Obs for ${ui.format(name)}</h2>
+<h2>Obs for ${ui.format(name)}</h2>
+<h3>Properties</h3>
 <table>
   <tr>
-   <th>Obs Id</th>
-   <th>Coded Name</th>
-   <th>Text</th>
-   <th>Date/Time</th>
+   <th>obsId</th>
+   <th>concept (Type of Obs)</th>
+   <th>obsDatetime</th>
+   <th>valueCodedName (Diagnoses)</th>
+   <th>valueText (Note)</th>
+   <th>comment</th>
   </tr>
   <% if (obs) { %>
      <% obs.each { %>
       <tr>
         <td>${ ui.format(it.obsId) }</td>
+        <td>${ ui.format(it.concept) }</td>
+        <td>${ ui.format(it.obsDatetime) }</td>
         <td>${ ui.format(it.valueCodedName) }</td>
         <td>${ ui.format(it.valueText) }</td>
-        <td>${ ui.format(it.obsDatetime) }</td>
+        <td>${ ui.format(it.comment) }</td>
       </tr>
     <% } %>
   <% } else { %>
@@ -21,3 +26,12 @@
   </tr>
   <% } %>
 </table>
+<h3>Set Your Own Properties!</h3>
+<form method="get">
+  Obs Id:<br>
+  <input id="obsId" type="number" name="obsId" required><br>
+  Comment:<br>
+  <input id="comment" type="text" name="comment" required>
+  <input type="submit" value="Update Comment">
+</form>
+

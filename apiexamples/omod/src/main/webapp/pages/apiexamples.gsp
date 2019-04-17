@@ -1,5 +1,13 @@
 <% ui.decorateWith("appui", "standardEmrPage") %>
-<h1 style="text-align:center;">API Examples</h1>
+<head>
+  <style>
+  h1 { text-align: center;}
+  h2 { margin-top: 40px; }
+  td:empty::before { content: "N/A"; }
+  </style>
+</head>
+
+<h1>API Examples</h1>
 
 Hello, world.
 
