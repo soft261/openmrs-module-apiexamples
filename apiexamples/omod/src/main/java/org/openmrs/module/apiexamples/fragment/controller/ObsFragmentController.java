@@ -63,7 +63,7 @@ public class ObsFragmentController {
 		System.out.println(location);
 		Obs obs = new Obs(person, concept, obsDateTime, location);
 		obs.setValueNumeric(Double.parseDouble(valueNumeric));
-		Context.getObsService().saveObs(obs, "New Obs Created");
+		Context.getObsService().saveObs(obs, null);
 		return new SuccessResult("New Obs Created!");
 	}
 	
@@ -80,8 +80,11 @@ public class ObsFragmentController {
 			    JOptionPane.ERROR_MESSAGE);
 			return new FailureResult("Try Again");
 		}
-		obs.setComment(comment);
-		Context.getObsService().saveObs(obs, "Comment Updated");
+		Obs newObs = Obs.newInstance(obs);
+		newObs.setPreviousVersion(obs);
+		newObs.setComment(comment);
+		Context.getObsService().saveObs(newObs, "Updated comment");
+		Context.getObsService().voidObs(obs, "Updated comment");
 		return new SuccessResult("Comment Updated!");
 	}
 	
@@ -100,8 +103,11 @@ public class ObsFragmentController {
 			    JOptionPane.ERROR_MESSAGE);
 			return new FailureResult("Try Again");
 		}
-		obs.setLocation(location);
-		Context.getObsService().saveObs(obs, "Location Updated");
+		Obs newObs = Obs.newInstance(obs);
+		newObs.setPreviousVersion(obs);
+		newObs.setLocation(location);
+		Context.getObsService().saveObs(newObs, "Updated Location");
+		Context.getObsService().voidObs(obs, "Updated Location");
 		return new SuccessResult("Location Updated!");
 	}
 	

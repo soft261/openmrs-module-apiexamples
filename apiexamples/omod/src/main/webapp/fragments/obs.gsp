@@ -35,8 +35,9 @@
   <div id="createObs">
   <h3>Create a New Vitals Obs for ${ui.format(name)}</h3>
   <form method="get">
-      Choose Concept:<br>
+      Choose Vital Concept:<br>
       <select name="conceptId" required>
+        <option value = "" selected disabled hidden>Choose Vital...</option>
         <option value="5090">Height (cm)</option>
         <option value="5089">Weight (kg)</option>
         <option value="5088">Temperature (C)</option>
@@ -47,9 +48,10 @@
         <option value="5092">Blood Oxygen Saturation</option>
       </select><br>
       Value Numeric:<br>
-      <input id="valueNumeric" type="number" step="any" name="valueNumeric" required><br>
+      <input id="valueNumeric" type="number" step="0.1" name="valueNumeric" required><br>
       Choose Location:<br>
       <select name="locationId" required>
+        <option value = "" selected disabled hidden>Choose Location...</option>
         <option value="1">Unknown Location</option>
         <option value="2">Pharmacy</option>
         <option value="3">Labratory</option>
@@ -81,6 +83,7 @@
       <input id="obsId2" type="number" name="obsId2" required><br>
       Choose Location:<br>
       <select name="locationId2" required>
+        <option value = "" selected disabled hidden>Choose Location...</option>
         <option value="1">Unknown Location</option>
         <option value="2">Pharmacy</option>
         <option value="3">Labratory</option>
