@@ -9,11 +9,8 @@
  */
 package org.openmrs.module.apiexamples.fragment.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Set;
 
 import org.openmrs.Person;
 import org.openmrs.PersonName;
@@ -39,7 +36,7 @@ public class PersonFragmentController {
 		person.addName(name);
 	}
 	
-	@RequestMapping(value = "/apiexamples.page", method = RequestMethod.GET)
+	@RequestMapping(value = "/apiexamples.page", method = RequestMethod.POST)
 	public void controller(FragmentModel model, @SpringBean("personService") PersonService service,
 	        @RequestParam(value = "personId", required = false) String personIdString,
 	        @RequestParam(value = "firstName", required = false) String firstName,

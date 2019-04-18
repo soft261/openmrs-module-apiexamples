@@ -21,14 +21,14 @@
     <% } %>
   <% } else { %>
   <tr>
-    <td colspan="5">${ ui.message("general.none") }</td>
+    <td colspan="6">${ ui.message("general.none") }</td>
   </tr>
   <% } %>
 </table>
 
 <h3>Modify values</h3>
 
-<form method="GET">
+<form method="POST">
   <label>Select a person to modify.</label> 
   <br/>
   <select name="personId">
@@ -43,7 +43,8 @@
   </select>
 
   <label>Name</label>
-  <input type="text" placeholder="Given name" name="firstName" /> <input type="test" placeholder="Family name (surname)" name="lastName" />
+  <input type="text" placeholder="Given name" name="firstName" />
+  <input type="test" placeholder="Family name (surname)" name="lastName" />
 
   <label>Birthdate</label>
   <input type="date" name="birthdate" />
@@ -55,4 +56,45 @@
   </select>
 
   <input type="submit" value="Update" />
+</form>
+
+<br/><br/>
+
+<table>
+  <tr>
+   <th>Person Id</th>
+   <th>Name</th>
+  </tr>
+  <tr>
+   <th>Address 1</th>
+   <th>Address 2</th>
+   <th>City / Village</th>
+   <th>State / Province</th>
+   <th>Postal Code</th>
+  </tr>
+  <% if (people) { %>
+     <% people.each { %>
+      <tr>
+        <td>${ ui.format(it.getPersonId()) }</td>
+        <td>${ it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }</td>
+      </tr>
+      <% if(it.getAddresses().size() > 0) { %>
+        <% it.getAddresses().each { %>
+          <tr>
+            <td>${ ui.format(it.address1) }</td>
+            <td>${ ui.format(it.address2) }</td>
+            <td>${ ui.format(it.cityVillage) }</td>
+            <td>${ ui.format(it.stateProvince) }</td>
+            <td>${ ui.format(it.postalCode) }</td>
+          </tr>
+        <% } %>
+      <% } %>
+    <% } %>
+  <% } else { %>
+  <tr>
+    <td colspan="5">${ ui.message("general.none") }</td>
+  </tr>
+  <% } %>
+</table>
+<form method="POST">
 </form>
