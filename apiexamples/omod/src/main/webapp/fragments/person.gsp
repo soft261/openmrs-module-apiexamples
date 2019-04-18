@@ -37,14 +37,14 @@
         <option value="${it.getPersonId()}">${it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</option>
       <% } %>
     <% } else { %>
-      <option disabled>No patients found</option>
+      <option disabled>No people found</option>
     <% } %>
     <option value="0">Add new...</option>
   </select>
 
   <label>Name</label>
   <input type="text" placeholder="Given name" name="firstName" />
-  <input type="test" placeholder="Family name (surname)" name="lastName" />
+  <input type="text" placeholder="Family name (surname)" name="lastName" />
 
   <label>Birthdate</label>
   <input type="date" name="birthdate" />
@@ -55,7 +55,7 @@
     <option value="F">Female</option>
   </select>
 
-  <input type="submit" value="Update" />
+  <input type="submit" value="Add name" />
 </form>
 
 <br/><br/>
@@ -96,5 +96,32 @@
   </tr>
   <% } %>
 </table>
+
 <form method="POST">
+  <label>Select a person to modify.</label> 
+  <br/>
+  <select name="personId">
+    <% if (people) { %>
+      <% people.each { %>
+        <option value="${it.getPersonId()}">${it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</option>
+      <% } %>
+    <% } else { %>
+      <option disabled>No people found</option>
+    <% } %>
+  </select>
+
+  <label>Address 1</label>
+  <input type="text" name="address1" placeholder="Address 1" required />
+  <label>Address 2</label>
+  <input type="text" name="address2" placeholder="Address 2" />
+  <label>City / Village</label>
+  <input type="text" name="cityVillage" placeholder="City / Village" required />
+  <label>State / Province</label>
+  <input type="text" name="stateProvince" placeholder="State / Province" required />
+  <label>Country</label>
+  <input type="text" name="country" placeholder="Country" required />
+  <label>Postal Code</label>
+  <input type="text" name="postalCode" placeholder="Postal code" required />
+
+  <input type="submit" value="Add address" />
 </form>
