@@ -16,15 +16,48 @@ import org.openmrs.PersonName;
 import org.openmrs.api.PersonService;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *  * Controller for a fragment that shows all users  
  */
 public class PersonFragmentController {
 	
-	public void controller(FragmentModel model, @SpringBean("personService") PersonService service) {
+	private static Boolean isNullOrEmpty(String str) {
+		return str == null || str.isEmpty();
+	}
+	
+	private void updatePersonName(Person person, String firstName, String lastName) {
+		PersonName name = new PersonName(firstName, "", lastName);
+		name.setPreferred(true);
+		person.addName(name);
+	}
+	
+	@RequestMapping(value = "/apiexamples.page", method = RequestMethod.GET)
+	public void controller(FragmentModel model, @SpringBean("personService") PersonService service,
+	        @RequestParam(value = "personId", required = false) String personIdString,
+	        @RequestParam(value = "firstName", required = false) String firstName,
+	        @RequestParam(value = "lastName", required = false) String lastName) {
 		// Database has multiple patients with the last name "Smith"
-		model.addAttribute("person", service.getPeople("Smith", null));
+		model.addAttribute("people", service.getPeople("Smith", null));
+		
+		if (!isNullOrEmpty(personIdString)) {
+			Integer personId = Integer.parseInt(personIdString);
+			Person person = service.getPerson(personId);
+			if (!isNullOrEmpty(firstName) || !isNullOrEmpty(lastName)) {
+				updatePersonName(person, firstName, lastName);
+			}
+			
+			try {
+				service.savePerson(person);
+			}
+			catch (Exception e) {
+				System.out.println("Error saving person.");
+				System.out.println(e);
+			}
+		}
 	}
 	
 }
