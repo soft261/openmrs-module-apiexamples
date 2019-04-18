@@ -1,8 +1,12 @@
 <% ui.decorateWith("appui", "standardEmrPage") %>
 <head>
   <style>
-  h1 { text-align: center;}
-  h2 { margin-top: 40px; }
+  h1 { 
+      text-align: center;
+      margin-top: 40px;
+    }
+  h2 { margin-top: 20px; }
+  h3 { margin-top: 20px; }
   td:empty::before { content: "N/A"; }
   </style>
 </head>

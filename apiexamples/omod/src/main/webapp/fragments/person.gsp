@@ -11,7 +11,7 @@
      <% person.each { %>
       <tr>
         <td>${ ui.format(it.personId) }</td>
-        <td>${ it.getNames().toString().replaceAll("\\[(.*?)\\]", "$1") }</td>
+        <td>${ it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }</td>
         <td>${ ui.format(it.gender) }</td>
         <td>${ ui.format(it.birthdate) }</td>
         <td>${ ui.format(it.isPatient) }</td>
