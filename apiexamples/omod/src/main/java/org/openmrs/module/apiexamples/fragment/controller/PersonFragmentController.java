@@ -22,11 +22,11 @@ import org.openmrs.ui.framework.fragment.FragmentModel;
  */
 public class PersonFragmentController {
 	
-	public String getPersonNameString(Person person, @SpringBean("personService") PersonService service) {
-		PersonName personName = person.getPersonName();
+	/* public String getPersonNameString(Person person) {
+		Set<PersonName> personName = person.getNames();
 		String nameString = personName.toString().replaceAll("\\[(.*?)\\]", "$1");
 		return nameString;
-	}
+	} */
 	
 	public void controller(FragmentModel model, @SpringBean("personService") PersonService service) {
 		// Database has multiple patients with the last name "Smith"

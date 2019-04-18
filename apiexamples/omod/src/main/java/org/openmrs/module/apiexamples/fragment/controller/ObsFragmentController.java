@@ -36,8 +36,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 //@RequestMapping(value = "openmrs/apiexamples/apiexamples.page")
 public class ObsFragmentController {
 	
-	// Get a person by their UUID here
-	Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
+	// Get person with personId 1
+	Person person = Context.getPersonService().getPerson(1);
 	
 	// Used to display the name of a Person in the title of the Obs table.
 	protected String getPersonNameString(Person person) {
