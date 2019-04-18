@@ -19,7 +19,17 @@
     <% } %>
   <% } else { %>
   <tr>
-    <td colspan="2">${ ui.message("general.none") }</td>
+    <td colspan="5">${ ui.message("general.none") }</td>
   </tr>
   <% } %>
+  <label for="toModify">People</label>
+  <select id="toModify">
+  <% if(person) { %>
+    <% person.each { %>
+      <option value="${it.personId}">${it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</option>
+    <% } %>
+  <% } else { %>
+    <option disabled>No patients found</option>
+  <% } %>
+  </select>
 </table>
