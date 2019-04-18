@@ -9,6 +9,10 @@
  */
 package org.openmrs.module.apiexamples.fragment.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 import org.openmrs.Person;
@@ -39,15 +43,36 @@ public class PersonFragmentController {
 	public void controller(FragmentModel model, @SpringBean("personService") PersonService service,
 	        @RequestParam(value = "personId", required = false) String personIdString,
 	        @RequestParam(value = "firstName", required = false) String firstName,
-	        @RequestParam(value = "lastName", required = false) String lastName) {
+	        @RequestParam(value = "lastName", required = false) String lastName,
+	        @RequestParam(value = "gender", required = false) String gender,
+	        @RequestParam(value = "birthdate", required = false) String birthdate) {
 		// Database has multiple patients with the last name "Smith"
 		model.addAttribute("people", service.getPeople("Smith", null));
 		
 		if (!isNullOrEmpty(personIdString)) {
 			Integer personId = Integer.parseInt(personIdString);
-			Person person = service.getPerson(personId);
+			Person person;
+			if (personId != 0) {
+				person = service.getPerson(personId);
+			} else {
+				person = new Person();
+			}
+			
 			if (!isNullOrEmpty(firstName) || !isNullOrEmpty(lastName)) {
 				updatePersonName(person, firstName, lastName);
+			}
+			if (!isNullOrEmpty(gender)) {
+				person.setGender(gender);
+			}
+			if (!isNullOrEmpty(birthdate)) {
+				try {
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					person.setBirthdate(format.parse(birthdate));
+				}
+				catch (ParseException e) {
+					System.out.println("Error parsing date.");
+					System.out.println(e);
+				}
 			}
 			
 			try {

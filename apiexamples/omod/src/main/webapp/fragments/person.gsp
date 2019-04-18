@@ -46,10 +46,10 @@
   <input type="text" placeholder="Given name" name="firstName" /> <input type="test" placeholder="Family name (surname)" name="lastName" />
 
   <label>Birthdate</label>
-  <input type="date" id="birthdate" />
+  <input type="date" name="birthdate" />
 
   <label>Gender</label>
-  <select id="gender">
+  <select name="gender">
     <option value="M">Male</option>
     <option value="F">Female</option>
   </select>
