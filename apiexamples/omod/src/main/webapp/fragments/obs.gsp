@@ -6,7 +6,7 @@
    <th>concept (Type of Obs)</th>
    <th>obsDatetime</th>
    <th>valueCodedName (Diagnoses)</th>
-   <th>valueText (Note)</th>
+   <th>valueNumeric</th>
    <th>comment</th>
    <th>location</th>
   </tr>
@@ -17,7 +17,7 @@
         <td>${ ui.format(it.concept) }</td>
         <td>${ ui.format(it.obsDatetime) }</td>
         <td>${ ui.format(it.valueCodedName) }</td>
-        <td>${ ui.format(it.valueText) }</td>
+        <td>${ ui.format(it.valueNumeric) }</td>
         <td>${ ui.format(it.comment) }</td>
         <td>${ ui.format(it.getLocation().toString().replaceAll("\\[(.*?)\\]", '$1')) }</td>
       </tr>
@@ -28,8 +28,41 @@
   </tr>
   <% } %>
 </table>
-<div id="set-properties">
+
+<div id="setProperties">
   <h2>Set Your Own Properties!</h2>
+
+  <div id="createObs">
+  <h3>Create a New Vitals Obs for ${ui.format(name)}</h3>
+  <form method="get">
+      Choose Concept:<br>
+      <select name="conceptId" required>
+        <option value="5090">Height (cm)</option>
+        <option value="5089">Weight (kg)</option>
+        <option value="5088">Temperature (C)</option>
+        <option value="5087">Pulse</option>
+        <option value="5244">Respiratory Rate</option>
+        <option value="5085">Systolic Blood Pressure</option>
+        <option value="5086">Diastolic Blood Pressure</option>
+        <option value="5092">Blood Oxygen Saturation</option>
+      </select><br>
+      Value Numeric:<br>
+      <input id="valueNumeric" type="number" step="any" name="valueNumeric" required><br>
+      Choose Location:<br>
+      <select name="locationId" required>
+        <option value="1">Unknown Location</option>
+        <option value="2">Pharmacy</option>
+        <option value="3">Labratory</option>
+        <option value="4">Insolation Ward</option>
+        <option value="5">Registration Desk</option>
+        <option value="6">Inpatient Ward</option>
+        <option value="7">Outpatient Clinic</option>
+        <option value="8">Amani Hospital</option>
+      </select><br>
+      <input type="submit" value="Create Obs">
+    </form>
+  </div>
+
   <div id="comment">
     <h3>Update Comment</h3>
     <form method="get">
@@ -40,13 +73,14 @@
       <input type="submit" value="Update Comment">
     </form>
   </div>
+
   <div id="location">
     <h3>Update Location</h3>
     <form method="get">
       Obs Id:<br>
       <input id="obsId2" type="number" name="obsId2" required><br>
       Choose Location:<br>
-      <select name="location" required>
+      <select name="locationId2" required>
         <option value="1">Unknown Location</option>
         <option value="2">Pharmacy</option>
         <option value="3">Labratory</option>
@@ -59,6 +93,7 @@
       <input type="submit" value="Update Location">
     </form>
   </div>
+
 </div>
 
 

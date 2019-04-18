@@ -9,11 +9,13 @@
  */
 package org.openmrs.module.apiexamples.fragment.controller;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.openmrs.Concept;
 import org.openmrs.Location;
 import org.openmrs.Obs;
 import org.openmrs.Person;
@@ -38,15 +40,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ObsFragmentController {
 	
 	// Get person with personId 1
-	Person person = Context.getPersonService().getPerson(1);
+	//Person person = Context.getPersonService().getPerson(1);
+	
 	// Get person with UUID of
-	// Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
+	Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
 	
 	// Used to display the name of a Person in the title of the Obs table.
 	protected String getPersonNameString(Person person) {
 		Set<PersonName> personName = person.getNames();
 		String nameString = personName.toString().replaceAll("\\[(.*?)\\]", "$1");
 		return nameString;
+	}
+	
+	protected FragmentActionResult createObs(Person person, String conceptId, Date obsDateTime, String locationId,
+	        String valueNumeric) {
+		if (conceptId.isEmpty() || locationId.isEmpty()) {
+			return null;
+		}
+		Concept concept = Context.getConceptService().getConcept(Integer.parseInt(conceptId));
+		System.out.println(concept);
+		Location location = Context.getLocationService().getLocation(Integer.parseInt(locationId));
+		System.out.println(location);
+		Obs obs = new Obs(person, concept, obsDateTime, location);
+		obs.setValueNumeric(Double.parseDouble(valueNumeric));
+		Context.getObsService().saveObs(obs, "New Obs Created");
+		return new SuccessResult("New Obs Created!");
 	}
 	
 	protected FragmentActionResult updateComment(String obsId, String comment) {
@@ -63,18 +81,18 @@ public class ObsFragmentController {
 			return new FailureResult("Try Again");
 		}
 		obs.setComment(comment);
-		Context.getObsService().saveObs(obs, "Date Updated");
+		Context.getObsService().saveObs(obs, "Comment Updated");
 		return new SuccessResult("Comment Updated!");
 	}
 	
-	protected FragmentActionResult updateLocation(String obsId2, String location) {
-		if (obsId2.isEmpty() || location.isEmpty()) {
+	protected FragmentActionResult updateLocation(String obsId2, String locationId2) {
+		if (obsId2.isEmpty() || locationId2.isEmpty()) {
 			return null;
 		}
 		Obs obs = Context.getObsService().getObs(Integer.parseInt(obsId2));
 		System.out.println(obs);
-		Location locationName = Context.getLocationService().getLocation(Integer.parseInt(location));
-		System.out.println(locationName);
+		Location location = Context.getLocationService().getLocation(Integer.parseInt(locationId2));
+		System.out.println(location);
 		if (obs == null) {
 			JFrame frame = new JFrame();
 			frame.setAlwaysOnTop(true);
@@ -82,21 +100,25 @@ public class ObsFragmentController {
 			    JOptionPane.ERROR_MESSAGE);
 			return new FailureResult("Try Again");
 		}
-		obs.setLocation(locationName);
-		Context.getObsService().saveObs(obs, "Date Updated");
-		return new SuccessResult("Comment Updated!");
+		obs.setLocation(location);
+		Context.getObsService().saveObs(obs, "Location Updated");
+		return new SuccessResult("Location Updated!");
 	}
 	
 	@RequestMapping(value = "/apiexamples.page", method = RequestMethod.GET)
 	public void controller(FragmentModel model, @SpringBean("obsService") ObsService service,
+	        @RequestParam(value = "conceptId", required = false) String conceptId,
+	        @RequestParam(value = "locationId", required = false) String locationId,
+	        @RequestParam(value = "valueNumeric", required = false) String valueNumeric,
 	        @RequestParam(value = "obsId", required = false) String obsId,
 	        @RequestParam(value = "comment", required = false) String comment,
 	        @RequestParam(value = "obsId2", required = false) String obsId2,
-	        @RequestParam(value = "location", required = false) String location) {
+	        @RequestParam(value = "locationId2", required = false) String locationId2) {
 		System.out.println(obsId);
 		System.out.println(comment);
+		createObs(person, conceptId, new Date(), locationId, valueNumeric);
 		updateComment(obsId, comment);
-		updateLocation(obsId2, location);
+		updateLocation(obsId2, locationId2);
 		model.addAttribute("name", getPersonNameString(person));
 		model.addAttribute("obs", service.getObservationsByPerson(person));
 	}
