@@ -152,7 +152,7 @@
 </table>
 
 <form method="POST">
-  <select disabled name="personA" style="display:inline">
+  <select name="personA" style="display:inline">
     <option value="${defaultPerson.getPersonId()}">
     ${ defaultPerson.getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }
     </option>
@@ -183,29 +183,51 @@
 
 <br/><br/>
 
+<h3>Person Attributes</h3>
+
 <table>
   <tr>
    <th>Person Id</th>
    <th>Name</th>
-   <th>Gender</th>
-   <th>Birthdate</th>
-   <th>Is Dead? / Deathdate</th>
-   <th>Patient?</th>
+   <th>Attributes</th>
   </tr>
   <% if (people) { %>
      <% people.each { %>
       <tr>
         <td>${ ui.format(it.getPersonId()) }</td>
         <td>${ it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }</td>
-        <td>${ ui.format(it.getGender()) }</td>
-        <td>${ ui.format(it.getBirthdate()) }</td>
-        <td>${ ui.format(it.getDead() ? it.getDeathDate() : "false") }</td>
-        <td>${ ui.format(it.isPatient()) }</td>
+        <td>${ it.getAttributes() }</td>
       </tr>
     <% } %>
   <% } else { %>
   <tr>
-    <td colspan="6">${ ui.message("general.none") }</td>
+    <td colspan="3">${ ui.message("general.none") }</td>
   </tr>
   <% } %>
 </table>
+
+<form>
+  <select name="person" style="display:inline">
+    <% if (people) { %>
+      <% people.each { %>
+        <option value="${it.getPersonId()}">${it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</option>
+      <% } %>
+    <% } else { %>
+      <option disabled selected>No people found</option>
+    <% } %>
+  </select>
+
+  <select name="personAttributeType" style="display:inline" required>
+    <% if (attributeTypes) { %>
+      <% attributeTypes.each { %>
+        <option value="${it.getPersonAttributeTypeId()}">${it.toString()}</option>
+      <% } %>
+    <% } else { %>
+      <option disabled selected>No attribute types found</option>
+    <% } %>
+  </select>
+
+  <input type="text" name="attributeValue" style="display:inline" required />
+
+  <input type="submit" value="Add attribute type" />
+</form>
