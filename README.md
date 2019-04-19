@@ -10,4 +10,8 @@ Please make sure your server has at least one Person with the last name 'Smith' 
 
 ## Deploying the Module
 
-Open a new terminal. Enter the `openmrs-module-apiexamples` folder, then enter the `apiexamples` folder. Execute `mvn package`. This will create an OMOD file in the `apiexamples/omod/target` folder. Install the module as normal.
+Open a new terminal. Enter the `openmrs-module-apiexamples` folder, then enter the `apiexamples` folder. Execute `mvn package`. This will create an OMOD file in the `apiexamples/omod/target` folder. Install the module in System Settings > Advanced System Settings > Manage Modules. Click `Add new module...`, choose the OMOD file, then click `Upload`.
+
+## Architecture
+
+The module uses Groovy / Java MVC. The pages (views) are located [here](/apiexamples/omod/src/main/webapp/fragments), and the controllers are located [here](/apiexamples/omod/src/main/java/org/openmrs/module/apiexamples/fragment/controller). The Java controller populates the Groovy views with data through a model, and the view displays the data as desired.
