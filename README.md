@@ -6,7 +6,7 @@ This module was created to demonstrate the basic functionality of the [Obs](http
 
 ## Setup
 
-Please make sure your server has at least one Person with the last name 'Smith' and that they have at lease one Obs attached to them (available by adding a visit note to the patient, or by clicking the `Manage Obs` link in Advanced System Settings).
+Please make sure your server has at least one Person with the last name 'Smith' and that they have at least one Obs attached to them (available by adding a visit note to the patient, or by clicking the `Manage Obs` link in Advanced System Settings).
 
 ## Deploying the Module
 
