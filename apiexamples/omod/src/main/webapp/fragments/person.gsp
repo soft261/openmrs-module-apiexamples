@@ -1,4 +1,4 @@
-<h2 style="margin-top:40px;">Person</h2>
+<h1>Person</h1>
 <table>
   <tr>
    <th>Person Id</th>
@@ -64,8 +64,6 @@
   <tr>
    <th>Person Id</th>
    <th>Name</th>
-  </tr>
-  <tr>
    <th>Address 1</th>
    <th>Address 2</th>
    <th>City / Village</th>
@@ -77,18 +75,16 @@
       <tr>
         <td>${ ui.format(it.getPersonId()) }</td>
         <td>${ it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }</td>
-      </tr>
       <% if(it.getAddresses().size() > 0) { %>
         <% it.getAddresses().each { %>
-          <tr>
             <td>${ ui.format(it.address1) }</td>
             <td>${ ui.format(it.address2) }</td>
             <td>${ ui.format(it.cityVillage) }</td>
             <td>${ ui.format(it.stateProvince) }</td>
             <td>${ ui.format(it.postalCode) }</td>
-          </tr>
         <% } %>
       <% } %>
+      </tr>  
     <% } %>
   <% } else { %>
   <tr>

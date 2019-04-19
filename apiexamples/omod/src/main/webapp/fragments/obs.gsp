@@ -5,10 +5,10 @@
    <th>obsId</th>
    <th>concept (Type of Obs)</th>
    <th>obsDatetime</th>
-   <th>valueCodedName (Diagnoses)</th>
    <th>valueNumeric</th>
    <th>comment</th>
    <th>location</th>
+   <th>previousVersion(obsId)</th>
   </tr>
   <% if (obs) { %>
      <% obs.each { %>
@@ -16,10 +16,10 @@
         <td>${ ui.format(it.obsId) }</td>
         <td>${ ui.format(it.concept) }</td>
         <td>${ ui.format(it.obsDatetime) }</td>
-        <td>${ ui.format(it.valueCodedName) }</td>
         <td>${ ui.format(it.valueNumeric) }</td>
         <td>${ ui.format(it.comment) }</td>
         <td>${ ui.format(it.getLocation().toString().replaceAll("\\[(.*?)\\]", '$1')) }</td>
+        <td>${ ui.format(it.getPreviousVersion().obsId)}</td>
       </tr>
     <% } %>
   <% } else { %>
@@ -34,7 +34,7 @@
 
   <div id="createObs">
   <h3>Create a New Vitals Obs for ${ui.format(name)}</h3>
-  <form method="get">
+  <form method="post">
       Choose Vital Concept:<br>
       <select name="conceptId" required>
         <option value = "" selected disabled hidden>Choose Vital...</option>
@@ -67,7 +67,7 @@
 
   <div id="comment">
     <h3>Update Comment</h3>
-    <form method="get">
+    <form method="post">
       Obs Id:<br>
       <input id="obsId" type="number" name="obsId" required><br>
       Comment:<br>
@@ -78,7 +78,7 @@
 
   <div id="location">
     <h3>Update Location</h3>
-    <form method="get">
+    <form method="post">
       Obs Id:<br>
       <input id="obsId2" type="number" name="obsId2" required><br>
       Choose Location:<br>

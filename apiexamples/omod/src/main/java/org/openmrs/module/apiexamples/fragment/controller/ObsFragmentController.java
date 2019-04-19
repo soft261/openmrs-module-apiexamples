@@ -39,11 +39,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 // @RequestMapping(value = "openmrs/apiexamples/apiexamples.page")
 public class ObsFragmentController {
 	
-	// Get person with personId 1
-	//Person person = Context.getPersonService().getPerson(1);
+	// Get person with personId 1 (Default)
+	Person person = Context.getPersonService().getPerson(1);
 	
-	// Get person with UUID of
-	Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
+	// Get person with specified UUID. Set this UUID to display a certain person in your database who is a patient and has obs.
+	// Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
 	
 	// Used to display the name of a Person in the title of the Obs table.
 	protected String getPersonNameString(Person person) {
@@ -52,8 +52,9 @@ public class ObsFragmentController {
 		return nameString;
 	}
 	
-	protected FragmentActionResult createObs(Person person, String conceptId, Date obsDateTime, String locationId,
-	        String valueNumeric) {
+	// Creates an obs for vitals given
+	protected FragmentActionResult createObs(ObsService service, Person person, String conceptId, Date obsDateTime,
+	        String locationId, String valueNumeric) {
 		if (conceptId.isEmpty() || locationId.isEmpty()) {
 			return null;
 		}
@@ -63,11 +64,12 @@ public class ObsFragmentController {
 		System.out.println(location);
 		Obs obs = new Obs(person, concept, obsDateTime, location);
 		obs.setValueNumeric(Double.parseDouble(valueNumeric));
-		Context.getObsService().saveObs(obs, null);
+		service.saveObs(obs, null);
 		return new SuccessResult("New Obs Created!");
 	}
 	
-	protected FragmentActionResult updateComment(String obsId, String comment) {
+	// Updates the comment of a given obs
+	protected FragmentActionResult updateComment(ObsService service, String obsId, String comment) {
 		if (obsId.isEmpty()) {
 			return null;
 		}
@@ -88,11 +90,12 @@ public class ObsFragmentController {
 		return new SuccessResult("Comment Updated!");
 	}
 	
-	protected FragmentActionResult updateLocation(String obsId2, String locationId2) {
+	// Updates the location of a given obs
+	protected FragmentActionResult updateLocation(ObsService service, String obsId2, String locationId2) {
 		if (obsId2.isEmpty() || locationId2.isEmpty()) {
 			return null;
 		}
-		Obs obs = Context.getObsService().getObs(Integer.parseInt(obsId2));
+		Obs obs = service.getObs(Integer.parseInt(obsId2));
 		System.out.println(obs);
 		Location location = Context.getLocationService().getLocation(Integer.parseInt(locationId2));
 		System.out.println(location);
@@ -111,7 +114,8 @@ public class ObsFragmentController {
 		return new SuccessResult("Location Updated!");
 	}
 	
-	@RequestMapping(value = "/apiexamples.page", method = RequestMethod.GET)
+	// Allows the controller to receive values from the view (obs.gsp) using a POST request
+	@RequestMapping(value = "/apiexamples.page", method = RequestMethod.POST)
 	public void controller(FragmentModel model, @SpringBean("obsService") ObsService service,
 	        @RequestParam(value = "conceptId", required = false) String conceptId,
 	        @RequestParam(value = "locationId", required = false) String locationId,
@@ -120,11 +124,9 @@ public class ObsFragmentController {
 	        @RequestParam(value = "comment", required = false) String comment,
 	        @RequestParam(value = "obsId2", required = false) String obsId2,
 	        @RequestParam(value = "locationId2", required = false) String locationId2) {
-		System.out.println(obsId);
-		System.out.println(comment);
-		createObs(person, conceptId, new Date(), locationId, valueNumeric);
-		updateComment(obsId, comment);
-		updateLocation(obsId2, locationId2);
+		createObs(service, person, conceptId, new Date(), locationId, valueNumeric);
+		updateComment(service, obsId, comment);
+		updateLocation(service, obsId2, locationId2);
 		model.addAttribute("name", getPersonNameString(person));
 		model.addAttribute("obs", service.getObservationsByPerson(person));
 	}

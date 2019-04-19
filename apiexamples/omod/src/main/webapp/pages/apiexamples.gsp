@@ -3,15 +3,19 @@
   <style>
   h1 { 
       text-align: center;
-      margin-top: 40px;
+      margin-top: 30px;
     }
+  #title {
+    font-size: 40px;
+    font-weight: bold;
+  }
   h2 { margin-top: 20px; }
   h3 { margin-top: 20px; }
   td:empty::before { content: "N/A"; }
   </style>
 </head>
 
-<h1>API Examples</h1>
+<h1 id="title">API Examples</h1>
 
 Hello, world.
 
