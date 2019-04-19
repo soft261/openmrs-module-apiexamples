@@ -1,4 +1,7 @@
+<br>
+<hr>
 <h1>Person</h1>
+<h2>Properties</h2>
 <table>
   <tr>
    <th>Person Id</th>
@@ -26,11 +29,10 @@
   <% } %>
 </table>
 
-<h3>Modify values</h3>
+<h2>Modify Values</h2>
 
 <form method="POST">
-  <label>Select a person to modify.</label> 
-  <br/>
+  Select a person to modify.<br>
   <select name="personId">
     <% if (people) { %>
       <% people.each { %>
@@ -43,8 +45,8 @@
   </select>
 
   <label>Name</label>
-  <input type="text" placeholder="Given name" name="firstName" />
-  <input type="text" placeholder="Family name (surname)" name="lastName" />
+  <input type="text" placeholder="Given Name" name="firstName" />
+  <input type="text" placeholder="Family Name (surname)" name="lastName" />
 
   <label>Birthdate</label>
   <input type="date" name="birthdate" />
@@ -55,7 +57,7 @@
     <option value="F">Female</option>
   </select>
 
-  <input type="submit" value="Add name" />
+  <input type="submit" value="Add Name" />
 </form>
 
 <br/><br/>
@@ -93,9 +95,9 @@
   <% } %>
 </table>
 
+<h3>Add an Address</h3>
 <form method="POST">
-  <label>Select a person to modify.</label> 
-  <br/>
+  Select a person to modify.<br>
   <select name="personId">
     <% if (people) { %>
       <% people.each { %>
@@ -117,14 +119,14 @@
   <label>Country</label>
   <input type="text" name="country" placeholder="Country" required />
   <label>Postal Code</label>
-  <input type="text" name="postalCode" placeholder="Postal code" required />
+  <input type="text" name="postalCode" placeholder="Postal Code" required />
 
-  <input type="submit" value="Add address" />
+  <input type="submit" value="Add Address" />
 </form>
 
 <br/><br/>
 
-<h3>Relationships for ${defaultPerson.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</h3>
+<h2>Relationships for ${defaultPerson.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</h2>
 
 <table>
   <tr>
@@ -179,7 +181,7 @@
 
 <br/><br/>
 
-<h3>Person Attributes</h3>
+<h2>Person Attributes</h2>
 
 <table>
   <tr>
@@ -201,7 +203,7 @@
   </tr>
   <% } %>
 </table>
-
+<br>
 <form>
   <select name="person" style="display:inline">
     <% if (people) { %>
@@ -222,8 +224,8 @@
       <option disabled selected>No attribute types found</option>
     <% } %>
   </select>
+  <br><br>Attribute Value:<br>
+  <input type="text" placeholder="Attribute Value" name="attributeValue" style="display:inline" required />
 
-  <input type="text" name="attributeValue" style="display:inline" required />
-
-  <input type="submit" value="Add attribute type" />
+  <input type="submit" value="Add Attribute Type" />
 </form>

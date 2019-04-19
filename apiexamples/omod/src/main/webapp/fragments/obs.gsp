@@ -1,3 +1,5 @@
+<br>
+<hr>
 <h1>Obs for ${ui.format(name)}</h1>
 <h2>Properties</h2>
 <table>
@@ -19,7 +21,7 @@
         <td>${ ui.format(it.valueNumeric) }</td>
         <td>${ ui.format(it.comment) }</td>
         <td>${ ui.format(it.getLocation().toString().replaceAll("\\[(.*?)\\]", '$1')) }</td>
-        <td>${ ui.format(it.getPreviousVersion().obsId)}</td>
+        <td>${ (it.getPreviousVersion() == null) ? "N/A" : ui.format(it.getPreviousVersion().obsId)}</td>
       </tr>
     <% } %>
   <% } else { %>
@@ -48,7 +50,7 @@
         <option value="5092">Blood Oxygen Saturation</option>
       </select><br>
       Value Numeric:<br>
-      <input id="valueNumeric" type="number" step="0.1" name="valueNumeric" required><br>
+      <input id="valueNumeric" placeholder="Value Numeric" type="number" step="0.1" name="valueNumeric" required><br>
       Choose Location:<br>
       <select name="locationId" required>
         <option value = "" selected disabled hidden>Choose Location...</option>
@@ -69,9 +71,9 @@
     <h3>Update Comment</h3>
     <form method="post">
       Obs Id:<br>
-      <input id="obsId" type="number" name="obsId" required><br>
+      <input id="obsId" placeholder="Obs Id" type="number" name="obsId" required><br>
       Comment:<br>
-      <input id="comment" type="text" name="comment" required>
+      <input id="comment" placeholder="Comment" type="text" name="comment" required>
       <input type="submit" value="Update Comment">
     </form>
   </div>
@@ -80,7 +82,7 @@
     <h3>Update Location</h3>
     <form method="post">
       Obs Id:<br>
-      <input id="obsId2" type="number" name="obsId2" required><br>
+      <input id="obsId2" placeholder="Obs Id" type="number" name="obsId2" required><br>
       Choose Location:<br>
       <select name="locationId2" required>
         <option value = "" selected disabled hidden>Choose Location...</option>

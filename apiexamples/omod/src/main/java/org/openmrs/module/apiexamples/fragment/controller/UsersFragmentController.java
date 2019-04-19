@@ -17,7 +17,7 @@ import org.openmrs.ui.framework.fragment.FragmentModel;
  *  * Controller for a fragment that shows all users  
  */
 public class UsersFragmentController {
-
+	
 	// This method is intended to update the password of the current user, but some
 	// bugs still remain. A similar approach could be used to implement a change
 	// password feature, but would need more attention/testing.
@@ -29,9 +29,9 @@ public class UsersFragmentController {
 	// service.changePassword(oldPassword, newPassword);
 	// return new SuccessResult("Comment Updated!");
 	// }
-
+	
 	public void controller(FragmentModel model, @SpringBean("userService") UserService service) {
 		model.addAttribute("users", service.getAllUsers());
 	}
-
+	
 }

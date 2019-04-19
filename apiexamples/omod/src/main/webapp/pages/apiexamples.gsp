@@ -12,6 +12,9 @@
   h2 { margin-top: 20px; }
   h3 { margin-top: 20px; }
   td:empty::before { content: "N/A"; }
+  hr {
+    border: 1px solid black;
+  }
   </style>
 </head>
 

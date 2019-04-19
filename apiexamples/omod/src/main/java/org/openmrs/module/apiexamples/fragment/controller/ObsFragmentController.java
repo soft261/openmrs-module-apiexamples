@@ -40,10 +40,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ObsFragmentController {
 	
 	// Get person with personId 1 (Default)
-	Person person = Context.getPersonService().getPerson(1);
+	//Person person = Context.getPersonService().getPerson(1);
 	
 	// Get person with specified UUID. Set this UUID to display a certain person in your database who is a patient and has obs.
-	// Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
+	Person person = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
 	
 	// Used to display the name of a Person in the title of the Obs table.
 	protected String getPersonNameString(Person person) {

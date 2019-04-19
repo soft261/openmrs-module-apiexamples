@@ -143,11 +143,6 @@ public class PersonFragmentController {
 	        @RequestParam(value = "personAttributeType", required = false) String attributeType,
 	        @RequestParam(value = "attributeValue", required = false) String attributeValue) {
 		// Database has multiple patients with the last name "Smith"
-		model.addAttribute("people", service.getPeople("Smith", null));
-		model.addAttribute("defaultPerson", defaultPerson);
-		model.addAttribute("relationships", service.getRelationshipsByPerson(defaultPerson));
-		model.addAttribute("relationshipTypes", service.getRelationshipTypes("Sibling/Sibling", null));
-		model.addAttribute("attributeTypes", service.getPersonAttributeTypes(null, null, null, null));
 		if (!isNullOrEmpty(personIdString)) {
 			Integer personId = Integer.parseInt(personIdString);
 			Person person;
@@ -166,6 +161,11 @@ public class PersonFragmentController {
 		if (!isNullOrEmpty(attributeValue)) {
 			updateAttribute(attributePerson, attributeType, attributeValue);
 		}
+		model.addAttribute("people", service.getPeople("Smith", null));
+		model.addAttribute("defaultPerson", defaultPerson);
+		model.addAttribute("relationships", service.getRelationshipsByPerson(defaultPerson));
+		model.addAttribute("relationshipTypes", service.getRelationshipTypes("Sibling/Sibling", null));
+		model.addAttribute("attributeTypes", service.getPersonAttributeTypes(null, null, null, null));
 	}
 	
 }
