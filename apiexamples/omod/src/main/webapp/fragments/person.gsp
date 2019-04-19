@@ -176,7 +176,7 @@
     <% } %>
   </select>
 
-  <input type="submit" value="Add relationship" />
+  <input type="submit" value="Add Relationship" />
 </form>
 
 <br/><br/>
