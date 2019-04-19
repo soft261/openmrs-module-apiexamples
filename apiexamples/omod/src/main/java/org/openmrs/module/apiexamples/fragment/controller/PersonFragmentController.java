@@ -11,6 +11,7 @@ package org.openmrs.module.apiexamples.fragment.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.openmrs.Person;
 import org.openmrs.PersonAddress;
@@ -22,14 +23,23 @@ import org.openmrs.api.context.Context;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *  * Controller for a fragment that shows all users  
  */
 public class PersonFragmentController {
 	
+	public Person defaultPerson = Context.getPersonService().getPersonByUuid("6757d65f-e2c8-40eb-b9e0-75d16644e1e6");
+	
 	private static Boolean isNullOrEmpty(String str) {
 		return str == null || str.isEmpty();
+	}
+	
+	@RequestMapping(value = "/test.form", method = RequestMethod.POST)
+	public ModelAndView Test() {
+		defaultPerson.setBirthdate(new Date());
+		return new ModelAndView("apiexamples.page");
 	}
 	
 	private void updatePerson(Person person, String firstName, String lastName, String gender, String birthdate) {
@@ -97,6 +107,9 @@ public class PersonFragmentController {
 	        @RequestParam(value = "postalCode", required = false) String postalCode) {
 		// Database has multiple patients with the last name "Smith"
 		model.addAttribute("people", service.getPeople("Smith", null));
+		model.addAttribute("defaultPerson", defaultPerson);
+		model.addAttribute("relationships", service.getRelationshipsByPerson(defaultPerson));
+		model.addAttribute("relationshipTypes", service.getRelationshipTypes("Sibling/Sibling", null));
 		if (!isNullOrEmpty(personIdString)) {
 			Integer personId = Integer.parseInt(personIdString);
 			Person person;

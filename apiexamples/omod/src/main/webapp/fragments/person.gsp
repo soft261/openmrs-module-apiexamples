@@ -106,7 +106,7 @@
         <option value="${it.getPersonId()}">${it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</option>
       <% } %>
     <% } else { %>
-      <option disabled>No people found</option>
+      <option disabled selected>No people found</option>
     <% } %>
   </select>
 
@@ -125,3 +125,87 @@
 
   <input type="submit" value="Add address" />
 </form>
+
+<br/><br/>
+
+<h3>Relationships for ${defaultPerson.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</h3>
+
+<table>
+  <tr>
+    <th>Person A</th>
+    <th>Relationship A &#8594; B</th>
+    <th>Person B</th>
+  </tr>
+  <% if (relationships) { %>
+    <% relationships.each { %>
+      <tr>
+        <td>${ it.getPersonA().getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }</td>
+        <td>${ ui.format(it.getRelationshipType().getaIsToB()) }</td>
+        <td>${ it.getPersonB().getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }</td>
+      </tr>
+    <% } %>
+  <% } else { %>
+    <tr>
+      <td colspan="3">${ ui.message("general.none") }</td>
+    </tr>
+  <% } %>
+</table>
+
+<form method="POST">
+  <select disabled name="personA" style="display:inline">
+    <option value="${defaultPerson.getPersonId()}">
+    ${ defaultPerson.getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }
+    </option>
+  </select>
+
+  <select name="relationshipType" style="display:inline">
+    <% if (relationshipTypes) { %>
+      <% relationshipTypes.each { %>
+        <option value="${it.getRelationshipTypeId()}">${it.getaIsToB()}</option>
+      <% } %>
+    <% } else { %>
+      <option disabled selected>No relationship types found</option>
+    <% } %>
+  </select>
+
+  <select name="personB" style="display:inline">
+    <% if (people) { %>
+      <% people.each { %>
+        <option value="${it.getPersonId()}">${it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1')}</option>
+      <% } %>
+    <% } else { %>
+      <option disabled selected>No people found</option>
+    <% } %>
+  </select>
+
+  <input type="submit" value="Add relationship" />
+</form>
+
+<br/><br/>
+
+<table>
+  <tr>
+   <th>Person Id</th>
+   <th>Name</th>
+   <th>Gender</th>
+   <th>Birthdate</th>
+   <th>Is Dead? / Deathdate</th>
+   <th>Patient?</th>
+  </tr>
+  <% if (people) { %>
+     <% people.each { %>
+      <tr>
+        <td>${ ui.format(it.getPersonId()) }</td>
+        <td>${ it.getNames().toString().replaceAll("\\[(.*?)\\]", '$1') }</td>
+        <td>${ ui.format(it.getGender()) }</td>
+        <td>${ ui.format(it.getBirthdate()) }</td>
+        <td>${ ui.format(it.getDead() ? it.getDeathDate() : "false") }</td>
+        <td>${ ui.format(it.isPatient()) }</td>
+      </tr>
+    <% } %>
+  <% } else { %>
+  <tr>
+    <td colspan="6">${ ui.message("general.none") }</td>
+  </tr>
+  <% } %>
+</table>
