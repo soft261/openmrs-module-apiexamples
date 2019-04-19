@@ -1,8 +1,10 @@
+![OpenMRS Logo](https://camo.githubusercontent.com/93680c923c12178e9fa6b523b1bbb644d32f4039/68747470733a2f2f74616c6b2e6f70656e6d72732e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f32582f662f663165633537396230333938636230346338306135346335366461323139623234343066653234392e6a7067)
+
 # API Examples Module
 
 ## Purpose
 
-This module was created to demonstrate the basic functionality of the [Obs](https://wiki.openmrs.org/display/docs/Obs), [Person](https://wiki.openmrs.org/display/docs/Person), and [User](https://wiki.openmrs.org/display/docs/User) objects in the OpenMRS API.
+This module was created to demonstrate the basic functionality of the [Obs](https://wiki.openmrs.org/display/docs/Obs), [Person](https://wiki.openmrs.org/display/docs/Person), and [User](https://wiki.openmrs.org/display/docs/User) objects in the OpenMRS Core API.
 
 ## Setup
 
