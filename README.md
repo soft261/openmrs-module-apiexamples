@@ -19,4 +19,4 @@ Open a new terminal. Enter into the `openmrs-module-apiexamples` folder, then en
 ## Architecture
 
 The module uses Groovy / Java files and Spring MVC. The pages (views) are located [here](/apiexamples/omod/src/main/webapp/fragments), and the controllers are located [here](/apiexamples/omod/src/main/java/org/openmrs/module/apiexamples/fragment/controller). The Java controller populates the Groovy views with data through a model, and the view displays the data as desired. More information regarding the architecture of this module can be found [here](https://wiki.openmrs.org/display/docs/UI+Framework+Step+By+Step+Tutorial).
-![MVC Architecture](https://drive.google.com/drive/folders/1ZgRdSs0DWRHDkb4FUwgYWe9Fh-keGFBo)
+![MVC Architecture](https://drive.google.com/uc?id=1w69biCob2bjOusQEMXSD8BzwYWZwHivu)
